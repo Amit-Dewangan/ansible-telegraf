@@ -1,0 +1,19 @@
+---
+# tasks file for ansible-telegraf
+
+- name: "Download Telegraf"
+  get_url:
+    url: https://dl.influxdata.com/telegraf/releases/{{ telegraf_agent_package_file_rpm }}
+    dest: "{{ telegraf_agent_package }}"
+
+- name: "Install Telegraf package"
+  package:
+    name: "{{ telegraf_agent_package }}"
+    state: "{{ telegraf_agent_package_state }}"
+  register: is_telegraf_package_installed
+  until: is_telegraf_package_installed is succeeded
+  become: yes
+  notify: "Restart Telegraf"
+
+- name: "Configure Telegraf"
+  include_tasks: "configure_linux.yml"

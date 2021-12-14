@@ -1,0 +1,27 @@
+---
+# description: Configure telegraf
+
+- name: "Copy the template"
+  template:
+    src: telegraf.conf
+    dest: "{{ telegraf_agent_config_path }}/telegraf.conf"
+    owner: telegraf
+    group: telegraf
+    mode: 0640
+  become: yes
+  notify:
+    - Restart Telegraf
+
+- name: "Copy configurations to telegraf.d directory"
+  copy:
+    src: ../templates/mysql/telegraf.d
+    dest: "{{ telegraf_agent_config_path }}/telegraf.d"
+    owner: telegraf
+    group: telegraf
+    mode: 0640
+  become: yes
+  notify:
+    - Restart Telegraf
+  when: "'databaseservers' in {{ group_names }}"
+
+
