@@ -1,0 +1,20 @@
+---
+telegraf_enabled: True
+# defaults file for ansible-telegraf
+
+telegraf_agent_version: 1.12.6
+telegraf_agent_version_patch: 1
+telegraf_agent_package: telegraf
+telegraf_agent_package_file_rpm: telegraf-{{ telegraf_agent_version }}-{{ telegraf_agent_version_patch }}.{{ ansible_architecture }}.rpm
+telegraf_agent_package_path: /tmp
+telegraf_agent_package_state: present
+telegraf_agent_hostname: "{{ ansible_fqdn }}"
+telegraf_agent_interval: 10
+telegraf_agent_debug: False
+telegraf_agent_round_interval: True
+telegraf_agent_flush_interval: 10
+telegraf_agent_flush_jitter: 0
+telegraf_agent_aws_tags: False
+telegraf_agent_aws_tags_prefix: ""
+telegraf_agent_config_path: /etc/telegraf
+telegraf_win_logfile_rotation_max_archives: 3
