@@ -22,7 +22,7 @@
   become: yes
   notify:
     - Restart Telegraf
-  when: "'databaseservers' in {{ group_names }}"
+ # when: "'databaseservers' in {{ group_names }}"
 
 - name: "Copy configurations to telegraf.d directory"
   copy:
