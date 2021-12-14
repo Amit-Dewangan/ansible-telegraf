@@ -15,7 +15,7 @@
 - name: "Copy configurations to telegraf.d directory"
   copy:
     src: ../templates/mysql/telegraf.d
-    dest: "{{ telegraf_agent_config_path }}/telegraf.d"
+    dest: "{{ telegraf_agent_config_path }}"
     owner: telegraf
     group: telegraf
     mode: 0640
@@ -27,7 +27,7 @@
 - name: "Copy configurations to telegraf.d directory"
   copy:
     src: ../templates/elasticsearch/telegraf.d
-    dest: "{{ telegraf_agent_config_path }}/telegraf.d"
+    dest: "{{ telegraf_agent_config_path }}"
     owner: telegraf
     group: telegraf
     mode: 0640
