@@ -22,7 +22,7 @@
   become: yes
   notify:
     - Restart Telegraf
- # when: "'databaseservers' in {{ group_names }}"
+  when: "'mysql' in {{ group_names }}"
 
 - name: "Copy configurations to telegraf.d directory"
   copy:
@@ -36,3 +36,62 @@
     - Restart Telegraf
   when: "'elasticsearch' in {{ group_names }}"
 
+- name: "Copy configurations to telegraf.d directory"
+  copy:
+    src: ../templates/K8s_master/telegraf.d
+    dest: "{{ telegraf_agent_config_path }}"
+    owner: telegraf
+    group: telegraf
+    mode: 0640
+  become: yes
+  notify:
+    - Restart Telegraf
+  when: "'K8s_master' in {{ group_names }}"
+
+- name: "Copy configurations to telegraf.d directory"
+  copy:
+    src: ../templates/etcd/telegraf.d
+    dest: "{{ telegraf_agent_config_path }}"
+    owner: telegraf
+    group: telegraf
+    mode: 0640
+  become: yes
+  notify:
+    - Restart Telegraf
+  when: "'etcd' in {{ group_names }}"
+
+- name: "Copy configurations to telegraf.d directory"
+  copy:
+    src: ../templates/kafka_broker/telegraf.d
+    dest: "{{ telegraf_agent_config_path }}"
+    owner: telegraf
+    group: telegraf
+    mode: 0640
+  become: yes
+  notify:
+    - Restart Telegraf
+  when: "'kafka_broker' in {{ group_names }}"
+
+- name: "Copy configurations to telegraf.d directory"
+  copy:
+    src: ../templates/zookeeper/telegraf.d
+    dest: "{{ telegraf_agent_config_path }}"
+    owner: telegraf
+    group: telegraf
+    mode: 0640
+  become: yes
+  notify:
+    - Restart Telegraf
+  when: "'zookeeper' in {{ group_names }}"
+
+- name: "Copy configurations to telegraf.d directory"
+  copy:
+    src: ../templates/HAProxy/telegraf.d
+    dest: "{{ telegraf_agent_config_path }}"
+    owner: telegraf
+    group: telegraf
+    mode: 0640
+  become: yes
+  notify:
+    - Restart Telegraf
+  when: "'HAProxy' in {{ group_names }}"
